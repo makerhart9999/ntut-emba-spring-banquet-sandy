@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: ntut-emba-spring-banquet
+    runtime: docker
+    plan: 0.5c-512mb
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/status
+    envVars:
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DATABASE_PATH
+        value: /data/spring_banquet.sqlite3
+      - key: COOKIE_SECURE
+        value: "1"
+    disk:
+      name: banquet-data
+      mountPath: /data
+      sizeGB: 1
+
